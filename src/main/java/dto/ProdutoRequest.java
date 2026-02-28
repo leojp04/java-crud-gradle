@@ -1,11 +1,13 @@
 package dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.apache.logging.log4j.message.Message;
 import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -17,6 +19,8 @@ public record ProdutoRequest(
         @NotNull(message = "O preço é obrigatório")
         @DecimalMin(value = "0.99" ,message = "O valor mínimo é 0.99")
         BigDecimal preco,
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+        @JsonFormat(pattern = "dd/MM/yyyy")
         LocalDate expiracao
 ) {
 }
