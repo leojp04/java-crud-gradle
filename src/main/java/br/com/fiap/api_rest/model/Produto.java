@@ -1,7 +1,6 @@
 package br.com.fiap.api_rest.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -14,7 +13,6 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id")
     private UUID id;
-    @NotNull
     @Column(name = "nome_produto")
     private String nome;
     @Column(name = "preco_produto")
@@ -22,6 +20,8 @@ public class Produto {
     @Column(name = "data_validade")
     private LocalDate expiracao;
 
+    public Produto() {
+    }
 
     public Produto(String nome, BigDecimal preco, LocalDate expiracao) {
         this.nome = nome;
@@ -60,9 +60,4 @@ public class Produto {
     public void setExpiracao(LocalDate expiracao) {
         this.expiracao = expiracao;
     }
-
-    public Produto() {
-    }
-
-
 }
