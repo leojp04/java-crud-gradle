@@ -41,9 +41,16 @@ public class ProdutoController {
         return new ResponseEntity<>(produto, HttpStatus.OK);
     }
 
+    // @PathVariable localhost:8080/produtos/1
+    // @RequestParam localhost:8080/produtos?pageNumber=0
+
+    // HATEOAS
+    // PageAnterior: localhost:8080/produtos?pageNumber=0
+    // PageSeguinte: null
     @GetMapping
-    public ResponseEntity<Page<ProdutoResponse>> readProduto() {
-        Pageable pageable = PageRequest.of(0, 2, Sort.by("nome").ascending());
+    public ResponseEntity<Page<ProdutoResponse>> readProduto(@RequestParam(defaultValue = "0") Integer pageNumber) {
+        // page number, page size, sort
+        Pageable pageable = PageRequest.of(pageNumber, 2, Sort.by("nome").ascending());
         Page<ProdutoResponse> produtos = produtoService.read(pageable);
         if (produtos.isEmpty()) {
             return  new ResponseEntity<>(HttpStatus.NOT_FOUND);

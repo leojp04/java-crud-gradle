@@ -42,7 +42,7 @@ public class ProdutoService {
         return produtoMapper.produtoToResponse(produto.get());
     }
 
-    //Page, Pageable seve para devolver os dados em paginas e não tudo de uma vez
+    // Page, Pageable
     public Page<ProdutoResponse> read(Pageable pageable) {
         return produtoRepository
                 .findAll(pageable)
