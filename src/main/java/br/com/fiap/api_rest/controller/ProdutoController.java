@@ -6,6 +6,10 @@ import br.com.fiap.api_rest.dto.ProdutoResponse;
 import br.com.fiap.api_rest.model.Produto;
 import br.com.fiap.api_rest.service.ProdutoService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +59,17 @@ public class ProdutoController {
     // PageSeguinte: null
 
     @Operation(summary = "Busca todos os produtos por página")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                            description = "Pagina de produtos retornada com sucesso!",
+                            content = @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation =ProdutoLista.class)
+                            )
+            ),
+            @ApiResponse(responseCode = "404",
+                    description = "Nenhum produto encontrado",
+                    content = @Content(schema = @Schema(implementation = String.class)))
+    })
     @GetMapping
     public ResponseEntity<Page<ProdutoLista>> readProduto(@RequestParam(defaultValue = "0") Integer pageNumber) {
         // page number, page size, sort
