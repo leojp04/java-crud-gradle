@@ -19,6 +19,7 @@ public class Produto {
     private BigDecimal preco;
     @Column(name = "data_validade")
     private LocalDate expiracao;
+    private Categoria categoria;
 
     public Produto() {
     }
