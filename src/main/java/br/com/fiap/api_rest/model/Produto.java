@@ -20,14 +20,17 @@ public class Produto {
     @Column(name = "data_validade")
     private LocalDate expiracao;
     private Categoria categoria;
+    private int estoque
 
     public Produto() {
     }
 
-    public Produto(String nome, BigDecimal preco, LocalDate expiracao) {
+    public Produto(String nome, BigDecimal preco, LocalDate expiracao, Categoria categoria, int estoque) {
         this.nome = nome;
         this.preco = preco;
         this.expiracao = expiracao;
+        this.categoria = categoria;
+        this.estoque = estoque;
     }
 
     public UUID getId() {
@@ -61,4 +64,12 @@ public class Produto {
     public void setExpiracao(LocalDate expiracao) {
         this.expiracao = expiracao;
     }
+
+    public Categoria getCategoria() { return categoria; }
+
+    public void setCategoria(Categoria categoria) { this.categoria = categoria; }
+
+    public int getEstoque() { return estoque; }
+
+    public void setEstoque(int estoque) { this.estoque = estoque; }
 }

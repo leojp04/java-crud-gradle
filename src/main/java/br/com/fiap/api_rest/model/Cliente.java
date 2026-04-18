@@ -20,6 +20,7 @@ public class Cliente {
     private LocalDate dataNascimento;
     @Column( name = "Telefone")
     private String telefone;
+    private Endereco endereco;
 
     public Cliente() {
     }
