@@ -1,12 +1,10 @@
 package br.com.fiap.api_rest.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -14,9 +12,17 @@ public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private Status status;
+    private StatusPedido status;
     private LocalDate data;
     private Double valor;
+    @ManyToOne
+    @JoinColumn(name = "id_cliente")
+    private Cliente cliente;
+    @ManyToMany
+    @JoinTable(name = "produto_pedido",
+            joinColumns = @JoinColumn(name = "id_produto", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id_pedido", referencedColumnName = "id"))
+    private List<Produto> produtos;
 
 
     public UUID getId() {
@@ -27,11 +33,11 @@ public class Pedido {
         this.id = id;
     }
 
-    public Status getStatus() {
+    public StatusPedido getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(StatusPedido status) {
         this.status = status;
     }
 
@@ -49,5 +55,13 @@ public class Pedido {
 
     public void setValor(Double valor) {
         this.valor = valor;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }

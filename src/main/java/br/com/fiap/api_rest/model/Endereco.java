@@ -25,11 +25,13 @@ public class Endereco {
     private String estado;
     @Column(name = "cep_endereco")
     private String cep;
+    @OneToOne(mappedBy = "endereco")
+    private Cliente cliente;
 
     public Endereco() {
     }
 
-    public Endereco(String logradouro, int numero, String complemento, String cidade, String bairro, String estado, String cep) {
+    public Endereco(String logradouro, String numero, String complemento, String cidade, String bairro, String estado, String cep) {
         this.logradouro = logradouro;
         this.numero = numero;
         this.complemento = complemento;
@@ -55,11 +57,11 @@ public class Endereco {
         this.logradouro = logradouro;
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 

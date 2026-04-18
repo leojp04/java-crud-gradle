@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -20,7 +21,9 @@ public class Produto {
     @Column(name = "data_validade")
     private LocalDate expiracao;
     private Categoria categoria;
-    private int estoque
+    private int estoque;
+    @ManyToMany (mappedBy = "produtos")
+    private List<Pedido> pedidos;
 
     public Produto() {
     }
@@ -72,4 +75,8 @@ public class Produto {
     public int getEstoque() { return estoque; }
 
     public void setEstoque(int estoque) { this.estoque = estoque; }
+
+    public List<Pedido> getPedidos() { return pedidos; }
+
+    public void setPedidos(List<Pedido> pedidos) { this.pedidos = pedidos; }
 }
