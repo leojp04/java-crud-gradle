@@ -12,8 +12,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @Info(title = "API de Produtos",
 		version = "v1",
 		description = "API RESTful de Produtos com Swagger e Validation",
-		license = @License (name = "MIT"),
-		contact = @Contact(name = "RM563065", email = "rm563065@fiap.com.br" )))
+		license = @License(name = "MIT", identifier = "MIT"),
+		contact = @Contact(name = "PF2092", email = "pf2092@fiap.com.br")))
 public class ApiRestApplication {
 
 	public static void main(String[] args) {

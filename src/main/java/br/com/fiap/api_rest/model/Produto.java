@@ -22,19 +22,8 @@ public class Produto {
     private LocalDate expiracao;
     private Categoria categoria;
     private int estoque;
-    @ManyToMany (mappedBy = "produtos")
+    @ManyToMany(mappedBy = "produtos")
     private List<Pedido> pedidos;
-
-    public Produto() {
-    }
-
-    public Produto(String nome, BigDecimal preco, LocalDate expiracao, Categoria categoria, int estoque) {
-        this.nome = nome;
-        this.preco = preco;
-        this.expiracao = expiracao;
-        this.categoria = categoria;
-        this.estoque = estoque;
-    }
 
     public UUID getId() {
         return id;
@@ -68,15 +57,27 @@ public class Produto {
         this.expiracao = expiracao;
     }
 
-    public Categoria getCategoria() { return categoria; }
+    public Categoria getCategoria() {
+        return categoria;
+    }
 
-    public void setCategoria(Categoria categoria) { this.categoria = categoria; }
+    public int getEstoque() {
+        return estoque;
+    }
 
-    public int getEstoque() { return estoque; }
+    public void setEstoque(int estoque) {
+        this.estoque = estoque;
+    }
 
-    public void setEstoque(int estoque) { this.estoque = estoque; }
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
 
-    public List<Pedido> getPedidos() { return pedidos; }
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
 
-    public void setPedidos(List<Pedido> pedidos) { this.pedidos = pedidos; }
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
 }

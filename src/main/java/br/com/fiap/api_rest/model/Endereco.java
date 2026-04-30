@@ -5,41 +5,19 @@ import jakarta.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "TB_ENDERECOS")
 public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "id")
     private UUID id;
-    @Column(name = "logradouro_endereco")
     private String logradouro;
-    @Column(name = "numero_endereco")
     private String numero;
-    @Column(name = "complemento_endereco")
     private String complemento;
-    @Column(name = "cidade_endereco")
     private String cidade;
-    @Column(name = "bairro_endereco")
     private String bairro;
-    @Column(name = "estado_endereco")
     private String estado;
-    @Column(name = "cep_endereco")
     private String cep;
     @OneToOne(mappedBy = "endereco")
     private Cliente cliente;
-
-    public Endereco() {
-    }
-
-    public Endereco(String logradouro, String numero, String complemento, String cidade, String bairro, String estado, String cep) {
-        this.logradouro = logradouro;
-        this.numero = numero;
-        this.complemento = complemento;
-        this.cidade = cidade;
-        this.bairro = bairro;
-        this.estado = estado;
-        this.cep = cep;
-    }
 
     public UUID getId() {
         return id;
@@ -103,5 +81,13 @@ public class Endereco {
 
     public void setCep(String cep) {
         this.cep = cep;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }

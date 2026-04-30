@@ -5,36 +5,19 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
-@Table (name = "TB_CLIENTES")
+@Entity
 public class Cliente {
-
     @Id
-    @Column( name = "CPF")
     private String cpf;
-    @Column( name = "Nome")
     private String nome;
-    @Column( name = "Email")
     private String email;
-    @Column( name = "Data_Nascimento")
     private LocalDate dataNascimento;
-    @Column( name = "Telefone")
     private String telefone;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Endereco_id")
+    @JoinColumn(name = "id_endereco")
     private Endereco endereco;
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos;
-
-    public Cliente() {
-    }
-
-    public Cliente(String cpf, String nome, String email, LocalDate dataNascimento, String telefone) {
-        this.cpf = cpf;
-        this.nome = nome;
-        this.email = email;
-        this.dataNascimento = dataNascimento;
-        this.telefone = telefone;
-    }
 
     public String getCpf() {
         return cpf;
@@ -76,11 +59,19 @@ public class Cliente {
         this.telefone = telefone;
     }
 
-    public Endereco getEndereco() { return endereco; }
+    public Endereco getEndereco() {
+        return endereco;
+    }
 
-    public void setEndereco(Endereco endereco) { this.endereco = endereco; }
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
 
-    public List<Pedido> getPedidos() { return pedidos; }
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
 
-    public void setPedidos(List<Pedido> pedidos) { this.pedidos = pedidos; }
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
 }

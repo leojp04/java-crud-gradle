@@ -12,7 +12,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -21,7 +20,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -57,18 +55,18 @@ public class ProdutoController {
     // HATEOAS
     // PageAnterior: localhost:8080/produtos?pageNumber=0
     // PageSeguinte: null
-
-    @Operation(summary = "Busca todos os produtos por página")
+    @Operation(summary = "Busca produtos por página")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
-                            description = "Pagina de produtos retornada com sucesso!",
-                            content = @Content(mediaType = "application/json",
-                                    schema = @Schema(implementation =ProdutoLista.class)
-                            )
+                    description = "Página de produtos retornada com sucesso!",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProdutoLista.class)
+                    )
             ),
             @ApiResponse(responseCode = "404",
                     description = "Nenhum produto encontrado",
-                    content = @Content(schema = @Schema(implementation = String.class)))
+                    content = @Content(schema = @Schema())
+            )
     })
     @GetMapping
     public ResponseEntity<Page<ProdutoLista>> readProduto(@RequestParam(defaultValue = "0") Integer pageNumber) {
@@ -81,7 +79,7 @@ public class ProdutoController {
         return new ResponseEntity<>(produtos, HttpStatus.OK);
     }
 
-    @Operation(summary = "Atualiza um produto especifico")
+    @Operation(summary = "Atualiza um produto específico")
     @PutMapping
     public ResponseEntity<Produto> updateProduto(@RequestBody Produto produto) {
         ProdutoResponse produtoExistente = produtoService.read(produto.getId());

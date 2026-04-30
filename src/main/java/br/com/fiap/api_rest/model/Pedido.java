@@ -2,8 +2,7 @@ package br.com.fiap.api_rest.model;
 
 import jakarta.persistence.*;
 
-
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,7 +12,7 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private StatusPedido status;
-    private LocalDate data;
+    private LocalDateTime data;
     private Double valor;
     @ManyToOne
     @JoinColumn(name = "id_cliente")
@@ -23,7 +22,6 @@ public class Pedido {
             joinColumns = @JoinColumn(name = "id_produto", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "id_pedido", referencedColumnName = "id"))
     private List<Produto> produtos;
-
 
     public UUID getId() {
         return id;
@@ -41,11 +39,11 @@ public class Pedido {
         this.status = status;
     }
 
-    public LocalDate getData() {
+    public LocalDateTime getData() {
         return data;
     }
 
-    public void setData(LocalDate data) {
+    public void setData(LocalDateTime data) {
         this.data = data;
     }
 
@@ -63,5 +61,13 @@ public class Pedido {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
     }
 }

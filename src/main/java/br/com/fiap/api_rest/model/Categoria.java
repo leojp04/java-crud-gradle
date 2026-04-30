@@ -8,5 +8,4 @@ public enum Categoria {
     ACESSORIO,
     TABACO,
     CIGARRO
-
 }
